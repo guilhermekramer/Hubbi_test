@@ -10,6 +10,7 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.2/ref/settings/
 """
 
+from email.policy import default
 from pathlib import Path
 from decouple import config
 
@@ -44,6 +45,7 @@ INSTALLED_APPS = [
     'user',
     'orders',
     'products',
+    'stock',
     'django_celery_beat',
     'django_celery_results',
     'drf_yasg',
@@ -86,13 +88,17 @@ WSGI_APPLICATION = 'api.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': config('DB_NAME'),
+        'USER': config('DB_USER'),
+        'PASSWORD': config('DB_PASSWORD'),
+        'HOST': config("DB_HOST", default="postgres_db"),
+        'PORT': config('DB_PORT', default='5432'),
     }
 }
 
-CELERY_BROKER_URL = "redis://localhost:6379"
-CELERY_ACCEPT_CONTENT = ['json']           # Formatos aceitos
+CELERY_BROKER_URL = "redis://redis:6379/0"
+CELERY_ACCEPT_CONTENT = ['json']           
 CELERY_TASK_SERIALIZER = 'json'  
 CELERY_BEAT_SCHEDULER = 'django_celery_beat.schedulers.DatabaseScheduler'
 CELERY_RESULT_BACKEND = 'django-db'

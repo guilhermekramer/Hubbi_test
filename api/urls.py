@@ -4,6 +4,7 @@ from rest_framework import routers
 
 from orders.views import OrdersViewSet
 from products.views import ProductsViewSet
+from stock.views import StockViewSet
 from user.views import UserViewSet
 
 
@@ -11,6 +12,8 @@ router = routers.DefaultRouter()
 router.register("users", UserViewSet)
 router.register("products", ProductsViewSet)
 router.register("orders", OrdersViewSet)
+router.register("stock", StockViewSet)
+
 from drf_yasg.views import get_schema_view
 from drf_yasg import openapi
 from rest_framework import permissions
@@ -25,7 +28,7 @@ schema_view = get_schema_view(
         contact=openapi.Contact(email="contact@snippets.local"),
         license=openapi.License(name="BSD License"),
         ),
-        
+
     public=True,
     permission_classes=(permissions.AllowAny,),
 )

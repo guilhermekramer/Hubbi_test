@@ -9,22 +9,29 @@ services:
       - 8000:8000
     volumes:
       - ".:/app"
+    depends_on:
+      - db
+      - redis
+    command: python manage.py runserver 0.0.0.0:8000
     environment:
       - DEBUG=1
+      - DATABASE_URL=postgres://DB_USER:DB_PASSWORD@DB_HOST:5432/DB_NAME
+      - REDIS_URL=redis://redis:6379
 
   db:
-    image: postgres:12
+    image: postgres:13
+    container_name: postgres_db
     environment:
-      POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: postgres
-      POSTGRES_DB: postgres
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_DB=postgres
     ports:
       - 5432:5432
-
   redis:
     image: redis:5.0.7
     ports:
       - 6379:6379
+    
 
   
 

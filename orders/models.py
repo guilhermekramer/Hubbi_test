@@ -7,4 +7,5 @@ class Orders(models.Model):
     order_status = models.CharField(max_length=50)
     order_total = models.DecimalField(max_digits=10, decimal_places=2)
     user = models.ForeignKey('user.User', related_name='user', on_delete=models.CASCADE)
-    products = models.ManyToManyField('products.Products', related_name='orders', blank=True)    
+    products = models.ManyToManyField('products.Products', related_name='orders', blank=True)   
+     
