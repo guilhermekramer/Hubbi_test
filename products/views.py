@@ -19,15 +19,15 @@ class ProductsViewSet(viewsets.ModelViewSet):
         response = super().create(request, *args, **kwargs)
 
         if response.status_code == 201:
-            Stock.objects.create(product_id=response.data['product_id'], quantity=request.data['product_quantity'])
+            Stock.objects.create(product_id=response.data['product_id'])
         return response
     
-    def update(self, request, *args, **kwargs):
-        response = super().update(request, *args, **kwargs)
+    # def update(self, request, *args, **kwargs):
+    #     response = super().update(request, *args, **kwargs)
 
-        if response.status_code == 200:
-            Stock.objects.filter(product_id=response.data['product_id']).update(quantity=request.data['product_quantity'])
-        return response
+    #     if response.status_code == 200:
+    #         Stock.objects.filter(product_id=response.data['product_id']).update(quantity=request.data['product_quantity'])
+    #     return response
 
         
     @action(detail=False, methods=['post'],url_path='upload-csv')

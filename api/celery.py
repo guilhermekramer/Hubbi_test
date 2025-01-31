@@ -20,11 +20,15 @@ app.conf.beat_schedule = {
 
 @app.task
 def check_product_stock():
+    from products.models import Products
+    from django.db.models import F
 
-    from stock.models import Stock
 
-    print("rodando a task")
-    low_stock_products = Stock.objects.filter(quantity__lt=10)
+    low_stock_products = Products.objects.filter(product_quantity__lt=10)
+    
     for stock in low_stock_products:
-        product_in_stock = stock.product.product_name
-        print(f"Product {product_in_stock} is running low on stock")
+        stock.product_quantity = F('product_quantity') + 10
+        stock.save()
+        print(f"Product {stock} has low stock. Updating product quantity.")
+
+

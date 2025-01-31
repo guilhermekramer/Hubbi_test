@@ -1,5 +1,3 @@
-from django.shortcuts import render
-
 from stock.models import Stock
 from stock.serializers import StockSerializer
 from rest_framework import viewsets
@@ -8,3 +6,6 @@ from rest_framework import viewsets
 class StockViewSet(viewsets.ModelViewSet):
     queryset = Stock.objects.all()
     serializer_class = StockSerializer
+
+
+    
