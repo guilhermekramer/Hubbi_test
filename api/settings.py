@@ -51,8 +51,9 @@ INSTALLED_APPS = [
     'django_celery_results',
     'drf_yasg',
     'rest_framework_simplejwt',
-
 ]
+
+
 
 
 
@@ -193,3 +194,5 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+DJANGO_SETTINGS_MODULE = 'api.settings'
