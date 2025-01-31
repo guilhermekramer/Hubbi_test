@@ -2,6 +2,7 @@ import io
 import re
 from django.shortcuts import render
 from rest_framework import viewsets
+from rest_framework.permissions import IsAuthenticated, IsAdminUser, AllowAny
 from products.models import Products
 from products.serializers import ProductsSerializer
 from .tasks import processar_csv
@@ -14,6 +15,14 @@ from rest_framework.response import Response
 class ProductsViewSet(viewsets.ModelViewSet):
     queryset = Products.objects.all()
     serializer_class = ProductsSerializer
+    permission_classes = [IsAuthenticated]
+
+    def get_permissions(self):
+        if self.action in ['list', 'retrieve']:
+            return [AllowAny()]  
+        else:
+            return [IsAdminUser()] 
+
 
     def create(self, request, *args, **kwargs):
         response = super().create(request, *args, **kwargs)
@@ -43,4 +52,4 @@ class ProductsViewSet(viewsets.ModelViewSet):
             return Response({'message': 'CSV file was processed successfully'})
         except Exception as e:
             return Response({'error': str(e)})
-            
+
