@@ -1,6 +1,7 @@
 ## Django API for management of a autostore
 
 A api foi construída usando Django Rest Framework, com autenticação em JWT, bem como utilizando ModelViewSets para criação de views.
+As credenciais do banco de dados estão no docker-compose, coloquei algumas variáveis de ambiente no .env, e no arquivo settings.py.  
 
 Exemplo:
 > Esta API permite realizar operações CRUD em um sistema de produtos genéricos
