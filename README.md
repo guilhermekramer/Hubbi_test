@@ -28,3 +28,15 @@ Clone o projeto no github
 
 - python manage.py makemigrations
 - python manage.py migrate
+
+
+.env:
+
+CELERY_BROKER_REDIS_URL="redis://localhost:6380"
+DEBUG=True
+DB_NAME = "postgres"
+DB_USER = "postgres"
+DB_PASSWORD = "postgres"
+DB_HOST = "db"
+DB_PORT = "5432"
+DJANGO_SETTINGS_MODULE=api.settings
