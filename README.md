@@ -1,5 +1,3 @@
-# Nome da API
-
 ## Django API for management of a autostore
 
 A api foi construída usando Django Rest Framework, com autenticação em JWT, bem como utilizando ModelViewSets para criação de views.
